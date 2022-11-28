@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         library.setOnClickListener(libraryListener)
-// Настройки
+// Настройки1
         val settingsListener: View.OnClickListener = object : View.OnClickListener {
             override fun onClick(v: View?) {
                 val settingsIntent = Intent(this@MainActivity, SettingsActivity::class.java)
