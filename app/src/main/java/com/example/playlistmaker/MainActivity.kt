@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         val search = findViewById<Button>(R.id.search)
         val library = findViewById<Button>(R.id.library)
         val settings = findViewById<Button>(R.id.settings)
-// Поиск
+
         val searchListener: View.OnClickListener = object : View.OnClickListener {
             override fun onClick(v: View?) {
                 val searchIntent = Intent(this@MainActivity, SearchActivity::class.java)
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         search.setOnClickListener(searchListener)
-// Медиатека
+
         val libraryListener: View.OnClickListener = object : View.OnClickListener {
             override fun onClick(v: View?) {
                 val libraryIntent = Intent(this@MainActivity, LibraryActivity::class.java)
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         library.setOnClickListener(libraryListener)
-// Настройки1
+
         val settingsListener: View.OnClickListener = object : View.OnClickListener {
             override fun onClick(v: View?) {
                 val settingsIntent = Intent(this@MainActivity, SettingsActivity::class.java)
