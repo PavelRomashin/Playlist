@@ -42,15 +42,14 @@
             android:layout_weight="1"
             android:backgroundTint="@color/white"
             android:text="@string/search"
+            android:textAllCaps="false"
             android:textColor="@color/buttonTextColor"
             android:textSize="@dimen/main_text_size"
             app:cornerRadius="@dimen/button_radius"
             app:icon="@drawable/search"
             app:iconGravity="textStart"
             app:iconPadding="@dimen/main_icon_padding"
-            app:iconTint="@color/buttonTextColor"
-
-            />
+            app:iconTint="@color/buttonTextColor" />
 
         <Button
             android:id="@+id/library"
@@ -59,6 +58,7 @@
             android:layout_weight="1"
             android:backgroundTint="@color/white"
             android:text="@string/library"
+            android:textAllCaps="false"
             android:textColor="@color/buttonTextColor"
             android:textSize="@dimen/main_text_size"
             app:cornerRadius="@dimen/button_radius"
@@ -74,6 +74,7 @@
             android:layout_weight="1"
             android:backgroundTint="@color/white"
             android:text="@string/settings"
+            android:textAllCaps="false"
             android:textColor="@color/buttonTextColor"
             android:textSize="@dimen/main_text_size"
             app:cornerRadius="@dimen/button_radius"
@@ -81,5 +82,7 @@
             app:iconGravity="textStart"
             app:iconPadding="@dimen/main_icon_padding"
             app:iconTint="@color/buttonTextColor" />
+
     </LinearLayout>
+
 </LinearLayout> 
