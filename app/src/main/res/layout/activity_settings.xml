@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".SettingsActivity">
+
+
+    <Button
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/settings_button_height"
+        android:backgroundTint="@color/white"
+        android:minWidth="@dimen/no_distance"
+        android:text="@string/settings"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="@dimen/main_text_size"
+        android:textStyle="normal"
+        app:icon="@drawable/arrow_back"
+        app:iconGravity="start"
+        app:iconPadding="28dp"
+        app:iconTint="@color/buttonTextColor" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="36dp">
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/settings_button_height"
+            android:paddingVertical="21dp"
+            android:text="@string/blackTheme"
+            android:textColor="@color/black"
+            android:textSize="@dimen/settings_text_size" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/settings_button_height"
+            android:backgroundTint="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/share"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="@dimen/settings_text_size" />
+
+            <Button
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:background="?android:attr/selectableItemBackground"
+                android:backgroundTint="@color/white"
+                android:minWidth="@dimen/no_distance"
+                app:icon="@drawable/share"
+                app:iconPadding="@dimen/no_distance"
+                app:iconTint="@color/settingsIconColor" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/settings_button_height"
+            android:backgroundTint="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/support"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="@dimen/settings_text_size" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:background="?android:attr/selectableItemBackground"
+                android:backgroundTint="@color/white"
+                android:minWidth="@dimen/no_distance"
+                app:icon="@drawable/support"
+                app:iconPadding="@dimen/no_distance"
+                app:iconTint="@color/settingsIconColor" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/settings_button_height"
+            android:backgroundTint="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/userAgreement"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="@dimen/settings_text_size" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:background="?android:attr/selectableItemBackground"
+                android:backgroundTint="@color/white"
+                android:minWidth="@dimen/no_distance"
+                app:icon="@drawable/user_agreement"
+                app:iconPadding="@dimen/no_distance"
+                app:iconTint="@color/settingsIconColor" />
+        </FrameLayout>
+
+    </LinearLayout>
+</LinearLayout>
