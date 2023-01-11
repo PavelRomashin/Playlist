@@ -10,5 +10,9 @@
     <string name="share">Share</string>
     <string name="support">Write to support</string>
     <string name="userAgreement">User agreement</string>
+    <string name="supportMessage">Thanks to developers for an amazing application!</string>
+    <string name="supportSubject">Message to application Playlist Maker developers</string>
+    <string name="input_hint">Search</string>
+
 
 </resources>
