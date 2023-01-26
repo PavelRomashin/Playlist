@@ -2,10 +2,10 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/backgroundMain"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/main_menu"
+    android:baselineAligned="false"
+    tools:context=".MainActivity">
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -15,14 +15,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:fontFamily="@font/ys_display_medium"
             android:paddingStart="16dp"
             android:paddingTop="16dp"
             android:text="@string/playlist_maker"
             android:textColor="@color/white"
+            android:textFontWeight="500"
             android:textSize="@dimen/main_text_size"
-            android:textStyle="bold"
-            android:fontFamily="@font/ys_display_medium"
-            android:textFontWeight="500"/>
+            android:textStyle="bold" />
 
     </FrameLayout>
 
@@ -39,21 +39,24 @@
 
         <Button
             android:id="@+id/search"
+            style="@style/main_button_style"
             android:text="@string/search"
             app:icon="@drawable/search"
-            style="@style/main_button_style"/>
+            app:iconTint="@color/backgroundBlack" />
 
         <Button
             android:id="@+id/library"
+            style="@style/main_button_style"
             android:text="@string/library"
             app:icon="@drawable/library"
-            style="@style/main_button_style"/>
+            app:iconTint="@color/backgroundBlack" />
 
         <Button
             android:id="@+id/settings"
+            style="@style/main_button_style"
             android:text="@string/settings"
             app:icon="@drawable/settings"
-            style="@style/main_button_style"/>
+            app:iconTint="@color/backgroundBlack" />
 
     </LinearLayout>
 

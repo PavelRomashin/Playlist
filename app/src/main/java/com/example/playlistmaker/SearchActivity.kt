@@ -17,9 +17,11 @@ import androidx.appcompat.app.AppCompatActivity
 class SearchActivity : AppCompatActivity() {
 
     private var searchText: String = ""
+
     companion object {
         const val SEARCH_ITEM = "SEARCH_ITEM"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
@@ -57,16 +59,18 @@ class SearchActivity : AppCompatActivity() {
         inputEditText.addTextChangedListener(simpleTextWatcher)
 
     }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(SEARCH_ITEM,searchText)
+        outState.putString(SEARCH_ITEM, searchText)
 
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        searchText = savedInstanceState.getString(SEARCH_ITEM,"SEARCH_ITEM")
+        searchText = savedInstanceState.getString(SEARCH_ITEM, "SEARCH_ITEM")
     }
+
     private fun clearButtonVisibility(s: CharSequence?): Int {
         return if (s.isNullOrEmpty()) {
             View.GONE
@@ -80,7 +84,8 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun Context.hideKeyboard(view: View) {
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
