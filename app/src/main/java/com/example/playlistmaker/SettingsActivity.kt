@@ -4,6 +4,7 @@ package com.example.playlistmaker
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -17,13 +18,12 @@ class SettingsActivity : AppCompatActivity() {
 
         val backButton = findViewById<Button>(R.id.backButton)
         val changeTheme = findViewById<SwitchCompat>(R.id.changeTheme)
-        val shareButton = findViewById<Button>(R.id.shareButton)
-        val supportButton = findViewById<Button>(R.id.supportButton)
-        val userAgreementButton = findViewById<Button>(R.id.userAgreementButton)
+        val shareButton = findViewById<View>(R.id.shareButton)
+        val supportButton = findViewById<View>(R.id.supportButton)
+        val userAgreementButton = findViewById<View>(R.id.userAgreementButton)
 
         backButton.setOnClickListener {
-            val backIntent = Intent(this, MainActivity::class.java)
-            startActivity(backIntent)
+            this.finish()
         }
 
 
@@ -34,15 +34,16 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(shareIntent)
         }
         supportButton.setOnClickListener {
-            val message = getString(R.string.supportMessage)
-            val subject = getString(R.string.supportSubject)
-            val email = getString(R.string.email)
-            val supportIntent = Intent(Intent.ACTION_SENDTO)
-            supportIntent.data = Uri.parse("mailto:")
-            supportIntent.putExtra(Intent.EXTRA_EMAIL, email)
-            supportIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
-            supportIntent.putExtra(Intent.EXTRA_TEXT, message)
-            startActivity(supportIntent)
+            Intent(Intent.ACTION_SENDTO).apply {
+                val message = getString(R.string.supportMessage)
+                val subject = getString(R.string.supportSubject)
+                val email = getString(R.string.email)
+                data = Uri.parse("mailto:")
+                putExtra(Intent.EXTRA_EMAIL, email)
+                putExtra(Intent.EXTRA_SUBJECT, subject)
+                putExtra(Intent.EXTRA_TEXT, message)
+                startActivity(this)
+            }
         }
         userAgreementButton.setOnClickListener {
             val browseIntent = Intent(Intent.ACTION_VIEW)

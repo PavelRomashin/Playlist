@@ -42,21 +42,21 @@
             style="@style/main_button_style"
             android:text="@string/search"
             app:icon="@drawable/search"
-            app:iconTint="@color/backgroundBlack" />
+             />
 
         <Button
             android:id="@+id/library"
             style="@style/main_button_style"
             android:text="@string/library"
             app:icon="@drawable/library"
-            app:iconTint="@color/backgroundBlack" />
+             />
 
         <Button
             android:id="@+id/settings"
             style="@style/main_button_style"
             android:text="@string/settings"
             app:icon="@drawable/settings"
-            app:iconTint="@color/backgroundBlack" />
+             />
 
     </LinearLayout>
 

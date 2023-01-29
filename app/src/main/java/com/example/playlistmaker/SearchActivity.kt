@@ -2,7 +2,6 @@ package com.example.playlistmaker
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -32,8 +31,7 @@ class SearchActivity : AppCompatActivity() {
 
 
         backButton.setOnClickListener {
-            val backIntent = Intent(this, MainActivity::class.java)
-            startActivity(backIntent)
+            this.finish()
         }
 
         clearButton.setOnClickListener {

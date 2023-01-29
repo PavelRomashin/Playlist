@@ -12,7 +12,7 @@
         style="@style/settings_header_button"
         android:text="@string/settings"
         app:icon="@drawable/arrow_back"
-        app:iconTint="?attr/text_header_color" />
+         />
 
 
     <LinearLayout
@@ -32,14 +32,14 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/settings_button_height"
             android:backgroundTint="@color/white"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/shareButton">
 
             <TextView
                 style="@style/settings_menu_text_style"
                 android:text="@string/share" />
 
             <Button
-                android:id="@+id/shareButton"
                 style="@style/settings_menu_button_style"
                 android:layout_gravity="end"
                 app:icon="@drawable/share" />
@@ -49,14 +49,14 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/settings_button_height"
             android:backgroundTint="@color/white"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/supportButton">
 
             <TextView
                 style="@style/settings_menu_text_style"
                 android:text="@string/support" />
 
             <Button
-                android:id="@+id/supportButton"
                 style="@style/settings_menu_button_style"
                 android:layout_gravity="end"
                 app:icon="@drawable/support" />
@@ -66,14 +66,14 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/settings_button_height"
             android:backgroundTint="@color/white"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/userAgreementButton">
 
             <TextView
                 style="@style/settings_menu_text_style"
                 android:text="@string/userAgreement" />
 
             <Button
-                android:id="@+id/userAgreementButton"
                 style="@style/settings_menu_button_style"
                 android:layout_gravity="end"
                 app:icon="@drawable/user_agreement" />
