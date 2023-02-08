@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="background_main_activity_color" format="reference" />
+    <attr name="background_button_color" format="reference" />
+    <attr name="background_text_color" format="reference" />
+    <attr name="icon_color" format="reference" />
+    <attr name="settings_icon_color" format="reference" />
+    <attr name="background_field_color" format="reference" />
+    <attr name="background_header_color" format="reference" />
+    <attr name="text_header_color" format="reference" />
+</resources>

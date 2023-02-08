@@ -11,7 +11,8 @@
         android:id="@+id/backButton"
         style="@style/settings_header_button"
         android:text="@string/settings"
-        app:icon="@drawable/arrow_back" />
+        app:icon="@drawable/arrow_back"
+         />
 
 
     <LinearLayout

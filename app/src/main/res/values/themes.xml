@@ -12,6 +12,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-
+        <item name="background_main_activity_color">@color/backgroundBlue</item>
+        <item name="background_button_color">@color/white</item>
+        <item name="background_text_color">@color/backgroundBlack</item>
+        <item name="icon_color">@color/settingsIconColor</item>
+        <item name="settings_icon_color">@color/settingsIconColor</item>
+        <item name="background_field_color">@color/grey</item>
+        <item name="background_header_color">@color/white</item>
+        <item name="text_header_color">@color/backgroundBlack</item>
     </style>
 </resources>
