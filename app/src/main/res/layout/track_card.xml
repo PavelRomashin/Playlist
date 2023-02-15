@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/main_track_card_style">
+
+    <ImageView
+        style="@style/track_image_style"
+        android:id="@+id/TrackImage"
+        android:layout_gravity="center_vertical"/>
+
+    <LinearLayout
+        style="@style/track_info_style"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/track_name_style"
+            android:id="@+id/TrackName"/>
+
+        <LinearLayout
+            style="@style/track_additional_info_style"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/track_details_style"
+                android:id="@+id/ArtistName"/>
+
+            <ImageView
+                style="@style/track_divider_style"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ellipse_1" />
+
+            <TextView
+                android:id="@+id/TrackLength"
+                style="@style/track_details_style"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        style="@style/arrow_forward_style"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/arrow_forward" />
+</LinearLayout>
