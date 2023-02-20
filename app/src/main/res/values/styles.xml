@@ -130,7 +130,7 @@
         <item name="android:textColor">?attr/settings_icon_color</item>
         <item name="android:textSize">@dimen/track_info_text_size</item>
         <item name="android:textFontWeight">400</item>
-        <item name="android:layout_weight">1</item>
+
 
     </style>
 

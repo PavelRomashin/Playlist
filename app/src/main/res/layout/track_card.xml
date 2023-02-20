@@ -8,14 +8,15 @@
         style="@style/track_image_style"
         android:layout_gravity="center_vertical"
         android:layout_marginVertical="@dimen/track_layout_margin"
-        android:layout_marginStart="@dimen/icon_start_margin" />
+         />
 
     <LinearLayout
         style="@style/track_info_style"
 
+        android:layout_width="0dp"
         android:layout_marginVertical="@dimen/info_vertical_margin"
         android:layout_marginStart="@dimen/track_layout_margin"
-        android:layout_marginEnd="@dimen/info_end_margin"
+        android:layout_marginEnd="@dimen/track_layout_margin"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -39,7 +40,8 @@
             <TextView
                 android:id="@+id/ArtistName"
                 style="@style/track_details_style"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="1" />
 
@@ -53,7 +55,8 @@
             <TextView
                 android:id="@+id/TrackLength"
                 style="@style/track_details_style"
-                android:layout_width="@dimen/time_track_width"
+                android:layout_width="wrap_content"
+                android:layout_weight="0"
                 android:maxLines="1" />
 
         </LinearLayout>
@@ -63,6 +66,5 @@
     <ImageView
         style="@style/arrow_forward_style"
         android:layout_gravity="center_vertical"
-        android:layout_marginEnd="@dimen/track_arrow_margin"
         android:src="@drawable/arrow_forward" />
 </LinearLayout>

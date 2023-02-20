@@ -19,5 +19,4 @@
     <dimen name="end_search_size">20dp</dimen>
     <dimen name="additional_top_margin">1dp</dimen>
     <dimen name="track_arrow_margin">20dp</dimen>
-    <dimen name="time_track_width">64dp</dimen>
-</resources>
+    </resources>
