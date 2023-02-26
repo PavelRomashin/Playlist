@@ -6,4 +6,17 @@
     <dimen name="button_radius">16dp</dimen>
     <dimen name="main_icon_padding">10dp</dimen>
     <dimen name="no_distance">0dp</dimen>
-</resources>
+    <dimen name="track_icon_size">45dp</dimen>
+    <dimen name="track_layout_margin">8dp</dimen>
+    <dimen name="double_track_layout_margin">16dp</dimen>
+    <dimen name="icon_start_margin">13dp</dimen>
+    <dimen name="info_vertical_margin">14dp</dimen>
+    <dimen name="info_end_margin">44dp</dimen>
+    <dimen name="divider_margin">5dp</dimen>
+    <dimen name="half_track_layout_margin">4dp</dimen>
+    <dimen name="track_info_text_size">11sp</dimen>
+    <dimen name="track_icon_round_size">2dp</dimen>
+    <dimen name="end_search_size">20dp</dimen>
+    <dimen name="additional_top_margin">1dp</dimen>
+    <dimen name="track_arrow_margin">20dp</dimen>
+    </resources>

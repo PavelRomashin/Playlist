@@ -18,8 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="36dp"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="8dp"
         tools:visibility="visible">
 
         <FrameLayout
@@ -55,5 +55,13 @@
                 tools:visibility="gone" />
         </FrameLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="24dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
     </LinearLayout>
+
 </LinearLayout>

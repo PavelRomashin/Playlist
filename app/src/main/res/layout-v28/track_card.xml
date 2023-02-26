@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/main_track_card_style"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/TrackImage"
+        style="@style/track_image_style"
+        android:layout_gravity="center_vertical"
+        android:layout_marginVertical="@dimen/track_layout_margin"
+         />
+
+    <LinearLayout
+        style="@style/track_info_style"
+
+        android:layout_marginVertical="@dimen/info_vertical_margin"
+        android:layout_marginStart="@dimen/track_layout_margin"
+        android:layout_marginEnd="@dimen/track_layout_margin"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+
+            android:id="@+id/TrackName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/track_text"
+            android:textColor="?attr/text_header_color"
+            android:textFontWeight="400"
+            android:textSize="@dimen/settings_text_size" />
+
+        <LinearLayout
+            style="@style/track_additional_info_style"
+            android:layout_marginTop="@dimen/additional_top_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/ArtistName"
+                style="@style/track_details_style"
+                android:layout_width="wrap_content"
+                android:ellipsize="end"
+                android:layout_weight="1"
+                android:maxLines="1" />
+
+            <ImageView
+                style="@style/track_divider_style"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/divider_margin"
+                android:layout_marginEnd="@dimen/divider_margin"
+                android:src="@drawable/ellipse_1" />
+
+            <TextView
+                android:id="@+id/TrackLength"
+                style="@style/track_details_style"
+                android:layout_width="wrap_content"
+                android:layout_weight="0"
+                android:maxLines="1" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        style="@style/arrow_forward_style"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/arrow_forward" />
+</LinearLayout>
