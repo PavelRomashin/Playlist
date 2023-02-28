@@ -16,4 +16,5 @@
     <string name="shareLink" translatable="false">https://practicum.yandex.ru/profile/android-developer/</string>
     <string name="input_hint">Поиск</string>
     <string name="track_text">Загрузка</string>
+    <string name="update">Обновить</string>
 </resources>

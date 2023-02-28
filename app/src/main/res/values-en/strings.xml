@@ -14,5 +14,6 @@
     <string name="supportSubject">Message to application Playlist Maker developers</string>
     <string name="input_hint">Search</string>
     <string name="track_text">Downloading</string>
+    <string name="update">update</string>
 
 </resources>

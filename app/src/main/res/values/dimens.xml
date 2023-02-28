@@ -18,5 +18,6 @@
     <dimen name="track_icon_round_size">2dp</dimen>
     <dimen name="end_search_size">20dp</dimen>
     <dimen name="additional_top_margin">1dp</dimen>
+    <dimen name="additional_top_margin1">24dp</dimen>
     <dimen name="track_arrow_margin">20dp</dimen>
     </resources>

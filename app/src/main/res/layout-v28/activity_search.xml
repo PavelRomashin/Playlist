@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:paddingHorizontal="8dp"
+        android:paddingHorizontal="16dp"
         android:paddingVertical="8dp"
         tools:visibility="visible">
 
@@ -36,11 +36,13 @@
                 android:drawableStart="@drawable/search1"
                 android:drawablePadding="8dp"
                 android:hint="@string/input_hint"
+                android:imeOptions="actionDone"
                 android:inputType="text"
                 android:maxLength="20"
                 android:maxLines="1"
                 android:minHeight="48dp"
                 android:paddingStart="12dp"
+                android:singleLine="true"
                 android:textColor="?attr/background_text_color"
                 android:textColorHint="?attr/icon_color" />
 
@@ -60,8 +62,56 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="24dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/errorImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:id="@+id/errorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/double_track_layout_margin"
+                    android:fontFamily="@font/ys_display_medium"
+                    android:gravity="center"
+                    android:textColor="?attr/text_header_color"
+                    android:textFontWeight="400"
+                    android:textSize="19sp" />
+
+                <Button
+                    android:id="@+id/buttonUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/additional_top_margin1"
+                    android:backgroundTint="?attr/text_header_color"
+                    android:fontFamily="@font/ys_display_medium"
+                    android:text="@string/update"
+                    android:textAllCaps="false"
+                    android:textColor="?attr/background_button_color"
+                    android:textFontWeight="500"
+                    android:textSize="14sp"
+                    app:cornerRadius="54dp" />
+
+            </LinearLayout>
+
+        </FrameLayout>
     </LinearLayout>
+
 
 </LinearLayout>
