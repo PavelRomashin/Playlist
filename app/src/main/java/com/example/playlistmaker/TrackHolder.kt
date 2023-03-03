@@ -18,7 +18,7 @@ class TrackHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(model: Track) {
         trackName.text = model.trackName
         artistName.text = model.artistName
-        trackLength.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(293000L)
+        trackLength.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(model.trackTime)
         Glide.with(trackImage).load(model.artworkUrl100).placeholder(R.drawable.placeholder)
             .centerCrop()
             .transform(RoundedCorners(itemView.resources.getDimensionPixelSize(R.dimen.track_icon_round_size)))

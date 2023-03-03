@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,14 +23,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class SearchActivity : AppCompatActivity() {
-
+    private val trackLibrary = ArrayList<Track>()
     private var searchText: String = ""
     private val ITunesApiBaseUrl = "https://itunes.apple.com"
     private val retrofit = Retrofit.Builder().baseUrl(ITunesApiBaseUrl)
         .addConverterFactory(GsonConverterFactory.create()).build()
-    private val notFound = "Ничего не нашлось"
-    private val networkError =
-        "Проблемы со связью\n\n Загрузка не удалась. Проверьте подключение к интернету"
+
     private val ITunesService = retrofit.create(ITunesApi::class.java)
 
     val trackAdapter = TrackAdapter(trackLibrary)
@@ -42,6 +41,8 @@ class SearchActivity : AppCompatActivity() {
 
     companion object {
         const val SEARCH_ITEM = "SEARCH_ITEM"
+        const val ERROR_ITEM = "ERROR_ITEM"
+        const val TRACKS ="TRACKS"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,9 +63,9 @@ class SearchActivity : AppCompatActivity() {
         clearButton.setOnClickListener {
             inputEditText.setText("")
             hideKeyboard()
-            errorImage.visibility = View.GONE
-            errorText.visibility = View.GONE
-            updateButton.visibility = View.GONE
+            errorImage.isVisible = false
+            errorText.isVisible = false
+            updateButton.isVisible = false
             trackLibrary.clear()
             trackAdapter.notifyDataSetChanged()
         }
@@ -112,18 +113,19 @@ class SearchActivity : AppCompatActivity() {
                             if (response.body()?.results?.isNotEmpty() == true) {
                                 trackLibrary.addAll(response.body()?.results!!)
                                 trackAdapter.notifyDataSetChanged()
+                                recyclerView.isVisible = true
                             } else {
-                                showMessage(notFound)
+                                showMessage(getString(R.string.notFound))
                             }
                         } else {
                             showMessage(
-                                networkError
+                                getString(R.string.networkError)
                             )
                         }
                     }
 
                     override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
-                        showMessage(networkError)
+                        showMessage(getString(R.string.networkError))
                     }
 
                 })
@@ -134,34 +136,38 @@ class SearchActivity : AppCompatActivity() {
 
     private fun showMessage(text: String) {
         if (text.isNotEmpty()) {
-            errorImage.visibility = View.VISIBLE
-            errorText.visibility = View.VISIBLE
+            errorImage.isVisible = true
+            errorText.isVisible = true
             trackLibrary.clear()
             trackAdapter.notifyDataSetChanged()
-            recyclerView.visibility = View.GONE
+            recyclerView.isVisible = false
 
-            if (text == notFound) {
-                updateButton.visibility = View.GONE
+            if (text == getString(R.string.notFound)) {
+                updateButton.isVisible = false
                 errorImage.setImageResource(R.drawable.not_found)
                 errorText.text = text
             } else {
-                updateButton.visibility = View.VISIBLE
+                updateButton.isVisible = true
                 errorImage.setImageResource(R.drawable.network_error)
                 errorText.text = text
                 updateButton.setOnClickListener { search() }
             }
         }
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(SEARCH_ITEM, searchText)
 
+
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         searchText = savedInstanceState.getString(SEARCH_ITEM, "SEARCH_ITEM")
+
+
     }
 
     private fun clearButtonVisibility(s: CharSequence?): Int {

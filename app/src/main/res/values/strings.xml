@@ -17,4 +17,9 @@
     <string name="input_hint">Поиск</string>
     <string name="track_text">Загрузка</string>
     <string name="update">Обновить</string>
-</resources>
+    <string name="notFound">Ничего не нашлось</string>
+    <string name="networkError">Проблемы со связью
+        \n\n
+        Загрузка не удалась. Проверьте подключение к интернету</string>
+
+ </resources>

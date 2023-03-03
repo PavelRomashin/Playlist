@@ -103,7 +103,7 @@
                     android:fontFamily="@font/ys_display_medium"
                     android:text="@string/update"
                     android:textAllCaps="false"
-                    android:textColor="?attr/background_button_color"
+                    android:textColor="?attr/background_header_color"
                     android:textFontWeight="500"
                     android:textSize="14sp"
                     app:cornerRadius="54dp" />

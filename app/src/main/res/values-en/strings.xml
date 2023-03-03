@@ -15,5 +15,8 @@
     <string name="input_hint">Search</string>
     <string name="track_text">Downloading</string>
     <string name="update">update</string>
+    <string name="notFound">Not found</string>
+
+    <string name="networkError">Network Error \\n\\n  Loading stopped. Check internet connection</string>
 
 </resources>
