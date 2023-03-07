@@ -16,4 +16,10 @@
     <string name="shareLink" translatable="false">https://practicum.yandex.ru/profile/android-developer/</string>
     <string name="input_hint">Поиск</string>
     <string name="track_text">Загрузка</string>
-</resources>
+    <string name="update">Обновить</string>
+    <string name="notFound">Ничего не нашлось</string>
+    <string name="networkError">Проблемы со связью
+        \n\n
+        Загрузка не удалась. Проверьте подключение к интернету</string>
+
+ </resources>
