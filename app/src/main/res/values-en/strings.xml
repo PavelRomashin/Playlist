@@ -18,5 +18,7 @@
     <string name="notFound">Not found</string>
 
     <string name="networkError">Network Error \\n\\n  Loading stopped. Check internet connection</string>
+    <string name="youWereSearched">You were searched</string>
+    <string name="clearHistory">Clear history</string>
 
 </resources>

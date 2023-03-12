@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
 
 
@@ -51,12 +50,12 @@ class SettingsActivity : AppCompatActivity() {
             browseIntent.data = Uri.parse(userAgreementPath)
             startActivity(browseIntent)
         }
-        changeTheme.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
-                true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
-                false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
+        val sharedPrefs = getSharedPreferences(SETTING_PREFERENCES, MODE_PRIVATE)
+        changeTheme.isChecked = sharedPrefs.getBoolean(DARK_THEME_KEY, false)
+        changeTheme.setOnCheckedChangeListener { switcher, checked ->
+            (applicationContext as App).switchTheme(checked)
+            sharedPrefs.edit().putBoolean(DARK_THEME_KEY, checked).apply()
         }
     }
 
