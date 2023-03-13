@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
+import com.example.playlistmaker.App.Companion.DARK_THEME_KEY
+import com.example.playlistmaker.App.Companion.SETTING_PREFERENCES
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -53,7 +55,7 @@ class SettingsActivity : AppCompatActivity() {
 
         val sharedPrefs = getSharedPreferences(SETTING_PREFERENCES, MODE_PRIVATE)
         changeTheme.isChecked = sharedPrefs.getBoolean(DARK_THEME_KEY, false)
-        changeTheme.setOnCheckedChangeListener { switcher, checked ->
+        changeTheme.setOnCheckedChangeListener { _, checked ->
             (applicationContext as App).switchTheme(checked)
             sharedPrefs.edit().putBoolean(DARK_THEME_KEY, checked).apply()
         }

@@ -24,7 +24,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-const val HISTORY_PREFERENCES = "HISTORY_PREFERENCES"
+
 
 class SearchActivity : AppCompatActivity() {
     private val trackLibrary = ArrayList<Track>()
@@ -54,27 +54,16 @@ class SearchActivity : AppCompatActivity() {
 
     companion object {
         const val SEARCH_ITEM = "SEARCH_ITEM"
-
+        const val HISTORY_PREFERENCES = "HISTORY_PREFERENCES"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
-
         val backButton = findViewById<Button>(R.id.backButton)
         val clearButton = findViewById<ImageView>(R.id.clearButton)
-        inputEditText = findViewById(R.id.inputEditText)
-        errorImage = findViewById(R.id.errorImage)
-        errorText = findViewById(R.id.errorText)
-        updateButton = findViewById(R.id.buttonUpdate)
-        recyclerViewHistory = findViewById(R.id.search_history_recycler_view)
-        recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.adapter = trackAdapter
-        sharedPrefsHistory = getSharedPreferences(HISTORY_PREFERENCES, MODE_PRIVATE)
-        searchHistory = SearchHistory(sharedPrefsHistory)
-        clearSearchButton = findViewById(R.id.clear_search_history)
-        layoutForHistory = findViewById(R.id.search_history)
-        errorLayout = findViewById(R.id.errorLayout)
+        announce()
+
 
 
         backButton.setOnClickListener {
@@ -87,6 +76,8 @@ class SearchActivity : AppCompatActivity() {
             errorImage.isVisible = false
             errorText.isVisible = false
             updateButton.isVisible = false
+            layoutForHistory.visibility = View.GONE
+            clearSearchButton.visibility = View.GONE
             trackLibrary.clear()
             trackAdapter.notifyDataSetChanged()
         }
@@ -150,10 +141,8 @@ class SearchActivity : AppCompatActivity() {
         trackAdapter.itemClickListener = { track ->
             if (trackLibraryHistory.contains(track)) {
                 trackLibraryHistory.remove(track)
-                trackLibraryHistory.add(0, track)
-            } else {
-                trackLibraryHistory.add(0, track)
-            }
+                            }
+            trackLibraryHistory.add(0, track)
             if (trackLibraryHistory.size == 10) {
                 trackLibraryHistory.removeAt(9)
             }
@@ -170,7 +159,21 @@ class SearchActivity : AppCompatActivity() {
         }
 
     }
+private fun announce(){
 
+    inputEditText = findViewById(R.id.inputEditText)
+    errorImage = findViewById(R.id.errorImage)
+    errorText = findViewById(R.id.errorText)
+    updateButton = findViewById(R.id.buttonUpdate)
+    recyclerViewHistory = findViewById(R.id.search_history_recycler_view)
+    recyclerView = findViewById(R.id.recyclerView)
+    recyclerView.adapter = trackAdapter
+    sharedPrefsHistory = getSharedPreferences(HISTORY_PREFERENCES, MODE_PRIVATE)
+    searchHistory = SearchHistory(sharedPrefsHistory)
+    clearSearchButton = findViewById(R.id.clear_search_history)
+    layoutForHistory = findViewById(R.id.search_history)
+    errorLayout = findViewById(R.id.errorLayout)
+}
     private fun search() {
         if (inputEditText.text.isNotEmpty()) {
             ITunesService.search(inputEditText.text.toString())
