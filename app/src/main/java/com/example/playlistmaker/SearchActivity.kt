@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
@@ -22,8 +21,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
-
 
 
 class SearchActivity : AppCompatActivity() {
@@ -76,8 +73,6 @@ class SearchActivity : AppCompatActivity() {
             errorImage.isVisible = false
             errorText.isVisible = false
             updateButton.isVisible = false
-            layoutForHistory.visibility = View.GONE
-            clearSearchButton.visibility = View.GONE
             trackLibrary.clear()
             trackAdapter.notifyDataSetChanged()
         }
@@ -96,11 +91,11 @@ class SearchActivity : AppCompatActivity() {
             layoutForHistory.visibility =
                 if (hasFocus && inputEditText.text.isEmpty() && searchHistory.read()
                         ?.isNotEmpty() == true
-                ) View.VISIBLE  else View.GONE
+                ) View.VISIBLE else View.GONE
             clearSearchButton.visibility =
                 if (hasFocus && inputEditText.text.isEmpty() && searchHistory.read()
-                    ?.isNotEmpty() == true
-            ) View.VISIBLE  else View.GONE
+                        ?.isNotEmpty() == true
+                ) View.VISIBLE else View.GONE
             errorLayout.visibility =
                 if (hasFocus && inputEditText.text.isEmpty()) View.GONE else View.VISIBLE
             recyclerView.visibility =
@@ -117,13 +112,20 @@ class SearchActivity : AppCompatActivity() {
 
                 clearButton.visibility = clearButtonVisibility(s)
                 layoutForHistory.visibility =
-                    if (inputEditText.hasFocus() && s?.isEmpty() == true) View.VISIBLE else View.GONE
+                    if (inputEditText.hasFocus() && s?.isEmpty() == true && searchHistory.read()
+                            ?.isNotEmpty() == true
+                    ) View.VISIBLE else View.GONE
                 clearSearchButton.visibility =
-                    if (inputEditText.hasFocus() && s?.isEmpty() == true) View.VISIBLE else View.GONE
+                    if (inputEditText.hasFocus() && s?.isEmpty() == true && searchHistory.read()
+                            ?.isNotEmpty() == true
+                    ) View.VISIBLE else View.GONE
                 errorLayout.visibility =
-                    if (inputEditText.hasFocus() && s?.isEmpty() == true) View.GONE else View.VISIBLE
+                    if (inputEditText.hasFocus() && s?.isEmpty() == true
+                    ) View.GONE else View.VISIBLE
                 recyclerView.visibility =
-                    if (inputEditText.hasFocus() && s?.isEmpty() == true) View.GONE else View.VISIBLE
+                    if (inputEditText.hasFocus() && s?.isEmpty() == true
+                    ) View.GONE else View.VISIBLE
+
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -141,7 +143,7 @@ class SearchActivity : AppCompatActivity() {
         trackAdapter.itemClickListener = { track ->
             if (trackLibraryHistory.contains(track)) {
                 trackLibraryHistory.remove(track)
-                            }
+            }
             trackLibraryHistory.add(0, track)
             if (trackLibraryHistory.size == 10) {
                 trackLibraryHistory.removeAt(9)
@@ -159,21 +161,23 @@ class SearchActivity : AppCompatActivity() {
         }
 
     }
-private fun announce(){
 
-    inputEditText = findViewById(R.id.inputEditText)
-    errorImage = findViewById(R.id.errorImage)
-    errorText = findViewById(R.id.errorText)
-    updateButton = findViewById(R.id.buttonUpdate)
-    recyclerViewHistory = findViewById(R.id.search_history_recycler_view)
-    recyclerView = findViewById(R.id.recyclerView)
-    recyclerView.adapter = trackAdapter
-    sharedPrefsHistory = getSharedPreferences(HISTORY_PREFERENCES, MODE_PRIVATE)
-    searchHistory = SearchHistory(sharedPrefsHistory)
-    clearSearchButton = findViewById(R.id.clear_search_history)
-    layoutForHistory = findViewById(R.id.search_history)
-    errorLayout = findViewById(R.id.errorLayout)
-}
+    private fun announce() {
+
+        inputEditText = findViewById(R.id.inputEditText)
+        errorImage = findViewById(R.id.errorImage)
+        errorText = findViewById(R.id.errorText)
+        updateButton = findViewById(R.id.buttonUpdate)
+        recyclerViewHistory = findViewById(R.id.search_history_recycler_view)
+        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView.adapter = trackAdapter
+        sharedPrefsHistory = getSharedPreferences(HISTORY_PREFERENCES, MODE_PRIVATE)
+        searchHistory = SearchHistory(sharedPrefsHistory)
+        clearSearchButton = findViewById(R.id.clear_search_history)
+        layoutForHistory = findViewById(R.id.search_history)
+        errorLayout = findViewById(R.id.errorLayout)
+    }
+
     private fun search() {
         if (inputEditText.text.isNotEmpty()) {
             ITunesService.search(inputEditText.text.toString())
