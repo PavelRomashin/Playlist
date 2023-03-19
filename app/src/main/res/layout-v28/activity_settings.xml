@@ -11,6 +11,7 @@
         android:id="@+id/backButton"
         style="@style/settings_header_button"
         android:text="@string/settings"
+        app:iconTint="?attr/text_header_color"
         app:icon="@drawable/arrow_back"
          />
 

@@ -2,6 +2,7 @@ package com.example.playlistmaker
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
@@ -16,6 +17,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -120,11 +122,9 @@ class SearchActivity : AppCompatActivity() {
                             ?.isNotEmpty() == true
                     ) View.VISIBLE else View.GONE
                 errorLayout.visibility =
-                    if (inputEditText.hasFocus() && s?.isEmpty() == true
-                    ) View.GONE else View.VISIBLE
+                    if (inputEditText.hasFocus() && s?.isEmpty() == true) View.GONE else View.VISIBLE
                 recyclerView.visibility =
-                    if (inputEditText.hasFocus() && s?.isEmpty() == true
-                    ) View.GONE else View.VISIBLE
+                    if (inputEditText.hasFocus() && s?.isEmpty() == true) View.GONE else View.VISIBLE
 
             }
 
@@ -139,6 +139,12 @@ class SearchActivity : AppCompatActivity() {
         recyclerViewHistory.adapter = trackAdapterHistory
         trackAdapterHistory.notifyDataSetChanged()
 
+        trackAdapterHistory.itemClickListener = { track ->
+            val playerIntent = Intent(this, PlayerActivity::class.java)
+            playerIntent.putExtra(TRACK, Gson().toJson(track))
+            startActivity(playerIntent)
+        }
+
 
         trackAdapter.itemClickListener = { track ->
             if (trackLibraryHistory.contains(track)) {
@@ -150,6 +156,10 @@ class SearchActivity : AppCompatActivity() {
             }
             searchHistory.write(trackLibraryHistory)
             trackAdapterHistory.notifyDataSetChanged()
+
+            val playerIntent = Intent(this, PlayerActivity::class.java)
+            playerIntent.putExtra(TRACK, Gson().toJson(track))
+            startActivity(playerIntent)
         }
 
 
