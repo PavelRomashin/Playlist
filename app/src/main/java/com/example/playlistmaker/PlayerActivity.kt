@@ -18,14 +18,14 @@ class PlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
         val backButton = findViewById<Button>(R.id.backButton)
-        val TrackImage = findViewById<ImageView>(R.id.TrackImage)
-        val TrackName = findViewById<TextView>(R.id.TrackName)
-        val ArtistName = findViewById<TextView>(R.id.ArtistName)
-        val TrackLength = findViewById<TextView>(R.id.TrackLengthValue)
-        val TrackLengthGroup =
+        val trackImage = findViewById<ImageView>(R.id.TrackImage)
+        val trackName = findViewById<TextView>(R.id.TrackName)
+        val artistName = findViewById<TextView>(R.id.ArtistName)
+        val trackLength = findViewById<TextView>(R.id.TrackLengthValue)
+        val trackLengthGroup =
             findViewById<androidx.constraintlayout.widget.Group>(R.id.TrackLengthGroup)
-        val AlbumName = findViewById<TextView>(R.id.AlbumName)
-        val AlbumGroup = findViewById<androidx.constraintlayout.widget.Group>(R.id.AlbumGroup)
+        val albumName = findViewById<TextView>(R.id.AlbumName)
+        val albumGroup = findViewById<androidx.constraintlayout.widget.Group>(R.id.AlbumGroup)
         val releaseYearValue = findViewById<TextView>(R.id.releaseYearValue)
         val releaseYearGroup =
             findViewById<androidx.constraintlayout.widget.Group>(R.id.releaseYearGroup)
@@ -41,25 +41,25 @@ class PlayerActivity : AppCompatActivity() {
         val json = intent.getStringExtra(TRACK)
         val track = Gson().fromJson(json, Track::class.java)
 
-        TrackName.text = track.trackName
-        ArtistName.text = track.artistName
-        TrackLength.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTime)
-        Glide.with(TrackImage).load(track.getCoverArtwork())
+        trackName.text = track.trackName
+        artistName.text = track.artistName
+        trackLength.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTime)
+        Glide.with(trackImage).load(track.getCoverArtwork())
             .placeholder(R.drawable.placeholder_player).centerCrop()
-            .transform(RoundedCorners(resources.getDimensionPixelSize(R.dimen.track_icon_round_size)))
-            .into(TrackImage)
+            .transform(RoundedCorners(resources.getDimensionPixelSize(R.dimen.placeholder_size)))
+            .into(trackImage)
 
         if (track.trackTime != 0) {
-            TrackLength.text =
+            trackLength.text =
                 SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTime)
         } else {
-            TrackLengthGroup.visibility = View.GONE
+            trackLengthGroup.visibility = View.GONE
         }
 
         if (track.collectionName.isNotEmpty()) {
-            AlbumName.text = track.collectionName
+            albumName.text = track.collectionName
         } else {
-            AlbumGroup.visibility = View.GONE
+            albumGroup.visibility = View.GONE
         }
 
         if (track.releaseDate.isNotEmpty()) {

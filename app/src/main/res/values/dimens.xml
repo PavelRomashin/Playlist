@@ -16,6 +16,7 @@
     <dimen name="half_track_layout_margin">4dp</dimen>
     <dimen name="track_info_text_size">11sp</dimen>
     <dimen name="track_icon_round_size">2dp</dimen>
+    <dimen name="placeholder_size">8dp</dimen>
     <dimen name="end_search_size">20dp</dimen>
     <dimen name="additional_top_margin">1dp</dimen>
     <dimen name="additional_top_margin1">24dp</dimen>
@@ -27,4 +28,4 @@
     <dimen name="thirty">30dp</dimen>
     <dimen name="track_details_size">13sp</dimen>
     <dimen name="seventeenDp">17sp</dimen>
-    </resources>
+</resources>

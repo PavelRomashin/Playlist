@@ -140,9 +140,7 @@ class SearchActivity : AppCompatActivity() {
         trackAdapterHistory.notifyDataSetChanged()
 
         trackAdapterHistory.itemClickListener = { track ->
-            val playerIntent = Intent(this, PlayerActivity::class.java)
-            playerIntent.putExtra(TRACK, Gson().toJson(track))
-            startActivity(playerIntent)
+            intentCreation(track)
         }
 
 
@@ -157,9 +155,7 @@ class SearchActivity : AppCompatActivity() {
             searchHistory.write(trackLibraryHistory)
             trackAdapterHistory.notifyDataSetChanged()
 
-            val playerIntent = Intent(this, PlayerActivity::class.java)
-            playerIntent.putExtra(TRACK, Gson().toJson(track))
-            startActivity(playerIntent)
+            intentCreation(track)
         }
 
 
@@ -186,6 +182,12 @@ class SearchActivity : AppCompatActivity() {
         clearSearchButton = findViewById(R.id.clear_search_history)
         layoutForHistory = findViewById(R.id.search_history)
         errorLayout = findViewById(R.id.errorLayout)
+    }
+
+    private fun intentCreation(track: Track) {
+        val playerIntent = Intent(this, PlayerActivity::class.java)
+        playerIntent.putExtra(TRACK, Gson().toJson(track))
+        startActivity(playerIntent)
     }
 
     private fun search() {
