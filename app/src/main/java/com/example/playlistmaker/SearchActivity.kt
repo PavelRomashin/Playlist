@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -13,6 +15,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -26,6 +29,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class SearchActivity : AppCompatActivity() {
+
+
     private val trackLibrary = ArrayList<Track>()
     private val trackLibraryHistory = ArrayList<Track>()
     private var searchText: String = ""
@@ -50,11 +55,13 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var clearSearchButton: Button
     private lateinit var layoutForHistory: View
     private lateinit var errorLayout: View
+    private lateinit var progressBar : ProgressBar
 
-    companion object {
-        const val SEARCH_ITEM = "SEARCH_ITEM"
-        const val HISTORY_PREFERENCES = "HISTORY_PREFERENCES"
-    }
+    private var isClickAllowed = true
+
+    private val handler = Handler(Looper.getMainLooper())
+
+    private val searchRunnable = Runnable { search() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,14 +88,6 @@ class SearchActivity : AppCompatActivity() {
 
 
 
-        inputEditText.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                search()
-                true
-            }
-            false
-        }
-
         inputEditText.setOnFocusChangeListener { _, hasFocus ->
             layoutForHistory.visibility =
                 if (hasFocus && inputEditText.text.isEmpty() && searchHistory.read()
@@ -111,6 +110,8 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                searchDebounce()
 
                 clearButton.visibility = clearButtonVisibility(s)
                 layoutForHistory.visibility =
@@ -182,21 +183,26 @@ class SearchActivity : AppCompatActivity() {
         clearSearchButton = findViewById(R.id.clear_search_history)
         layoutForHistory = findViewById(R.id.search_history)
         errorLayout = findViewById(R.id.errorLayout)
+        progressBar = findViewById(R.id.progress_Bar)
     }
 
     private fun intentCreation(track: Track) {
-        val playerIntent = Intent(this, PlayerActivity::class.java)
-        playerIntent.putExtra(TRACK, Gson().toJson(track))
-        startActivity(playerIntent)
+        if(clickDebounce()) {
+            val playerIntent = Intent(this, PlayerActivity::class.java)
+            playerIntent.putExtra(TRACK, Gson().toJson(track))
+            startActivity(playerIntent)
+        }
     }
 
     private fun search() {
         if (inputEditText.text.isNotEmpty()) {
+            progressBar.isVisible = true
             ITunesService.search(inputEditText.text.toString())
                 .enqueue(object : Callback<TrackResponse> {
                     override fun onResponse(
                         call: Call<TrackResponse>, response: Response<TrackResponse>
                     ) {
+                        progressBar.isVisible = false
                         if (response.code() == 200) {
                             trackLibrary.clear()
                             if (response.body()?.results?.isNotEmpty() == true) {
@@ -214,6 +220,7 @@ class SearchActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
+                        progressBar.isVisible = false
                         showMessage(getString(R.string.networkError))
                     }
 
@@ -227,6 +234,7 @@ class SearchActivity : AppCompatActivity() {
         if (text.isNotEmpty()) {
             errorImage.isVisible = true
             errorText.isVisible = true
+            progressBar.isVisible = false
             trackLibrary.clear()
             trackAdapter.notifyDataSetChanged()
             recyclerView.isVisible = false
@@ -277,6 +285,26 @@ class SearchActivity : AppCompatActivity() {
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
+    private fun clickDebounce() : Boolean {
+        val current = isClickAllowed
+        if (isClickAllowed) {
+            isClickAllowed = false
+            handler.postDelayed({ isClickAllowed = true }, CLICK_DEBOUNCE_DELAY)
+        }
+        return current
+    }
+
+    private fun searchDebounce() {
+        handler.removeCallbacks(searchRunnable)
+        handler.postDelayed(searchRunnable, SEARCH_DEBOUNCE_DELAY)
+    }
+
+    companion object {
+        const val SEARCH_ITEM = "SEARCH_ITEM"
+        const val HISTORY_PREFERENCES = "HISTORY_PREFERENCES"
+        private const val CLICK_DEBOUNCE_DELAY = 1000L
+        private const val SEARCH_DEBOUNCE_DELAY = 2000L
+    }
 }
 
 

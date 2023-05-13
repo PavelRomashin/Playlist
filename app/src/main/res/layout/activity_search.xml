@@ -57,6 +57,15 @@
                 tools:visibility="gone" />
         </FrameLayout>
 
+        <ProgressBar
+            android:id="@+id/progress_Bar"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/purple_500"
+            android:visibility="gone"
+            />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
@@ -145,6 +154,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
             </LinearLayout>
 
             <Button
@@ -163,9 +174,13 @@
                 android:textSize="14sp"
                 app:cornerRadius="54dp" />
 
+
+
         </FrameLayout>
 
+
     </LinearLayout>
+
 
 
 </LinearLayout>
