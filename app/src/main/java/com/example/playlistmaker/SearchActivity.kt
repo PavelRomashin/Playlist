@@ -10,7 +10,7 @@ import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.inputmethod.EditorInfo
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
@@ -55,7 +55,8 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var clearSearchButton: Button
     private lateinit var layoutForHistory: View
     private lateinit var errorLayout: View
-    private lateinit var progressBar : ProgressBar
+    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBarContainer: ViewGroup
 
     private var isClickAllowed = true
 
@@ -184,10 +185,11 @@ class SearchActivity : AppCompatActivity() {
         layoutForHistory = findViewById(R.id.search_history)
         errorLayout = findViewById(R.id.errorLayout)
         progressBar = findViewById(R.id.progress_Bar)
+        progressBarContainer = findViewById(R.id.progress_Bar_Frame)
     }
 
     private fun intentCreation(track: Track) {
-        if(clickDebounce()) {
+        if (clickDebounce()) {
             val playerIntent = Intent(this, PlayerActivity::class.java)
             playerIntent.putExtra(TRACK, Gson().toJson(track))
             startActivity(playerIntent)
@@ -196,13 +198,13 @@ class SearchActivity : AppCompatActivity() {
 
     private fun search() {
         if (inputEditText.text.isNotEmpty()) {
-            progressBar.isVisible = true
+            progressBarContainer.isVisible = true
             ITunesService.search(inputEditText.text.toString())
                 .enqueue(object : Callback<TrackResponse> {
                     override fun onResponse(
                         call: Call<TrackResponse>, response: Response<TrackResponse>
                     ) {
-                        progressBar.isVisible = false
+                        progressBarContainer.isVisible = false
                         if (response.code() == 200) {
                             trackLibrary.clear()
                             if (response.body()?.results?.isNotEmpty() == true) {
@@ -220,7 +222,7 @@ class SearchActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
-                        progressBar.isVisible = false
+                        progressBarContainer.isVisible = false
                         showMessage(getString(R.string.networkError))
                     }
 
@@ -234,7 +236,7 @@ class SearchActivity : AppCompatActivity() {
         if (text.isNotEmpty()) {
             errorImage.isVisible = true
             errorText.isVisible = true
-            progressBar.isVisible = false
+            progressBarContainer.isVisible = false
             trackLibrary.clear()
             trackAdapter.notifyDataSetChanged()
             recyclerView.isVisible = false
@@ -285,7 +287,7 @@ class SearchActivity : AppCompatActivity() {
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    private fun clickDebounce() : Boolean {
+    private fun clickDebounce(): Boolean {
         val current = isClickAllowed
         if (isClickAllowed) {
             isClickAllowed = false

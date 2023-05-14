@@ -142,7 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/twentyNineDp"
             android:gravity="center_horizontal"
-            android:text="@string/track_text"
+            android:text="@string/start_null"
             android:textColor="?attr/text_header_color"
             android:textFontWeight="500"
             android:textSize="@dimen/artist_name_size"

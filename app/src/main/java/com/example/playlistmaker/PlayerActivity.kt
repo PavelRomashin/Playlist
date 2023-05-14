@@ -33,6 +33,7 @@ class PlayerActivity : AppCompatActivity() {
     private lateinit var genreGroup: androidx.constraintlayout.widget.Group
     private lateinit var countryName: TextView
     private lateinit var countryGroup: androidx.constraintlayout.widget.Group
+    private lateinit var secsOfListening: TextView
     private lateinit var addTrack: ImageButton
     private lateinit var likeButton: ImageButton
     private lateinit var track: Track
@@ -43,24 +44,23 @@ class PlayerActivity : AppCompatActivity() {
 
     private val run = object : Runnable {
         override fun run() {
-            if (playerState == STATE_PLAYING)
-                trackLength.text =
-                    SimpleDateFormat(
-                        "mm:ss",
-                        Locale.getDefault()
-                    ).format(mediaPlayer.currentPosition)
+            if (playerState == STATE_PLAYING) secsOfListening.text = SimpleDateFormat(
+                "mm:ss", Locale.getDefault()
+            ).format(mediaPlayer.currentPosition)
             handler.postDelayed(this, DELAY)
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
         initialization()
+        val json = intent.getStringExtra(TRACK)
+        track = Gson().fromJson(json, Track::class.java)
+        handler = Handler(Looper.getMainLooper())
         preparePlayer()
 
-        val json = intent.getStringExtra(TRACK)
-        val track = Gson().fromJson(json, Track::class.java)
-        handler = Handler(Looper.getMainLooper())
+
 
         playButton.setOnClickListener {
             playbackControl()
@@ -111,36 +111,39 @@ class PlayerActivity : AppCompatActivity() {
 
 
     }
+
     override fun onPause() {
         super.onPause()
         pausePlayer()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         mediaPlayer.release()
     }
-    private fun initialization(){
+
+    private fun initialization() {
         playButton = findViewById(R.id.playTrack)
         backButton = findViewById(R.id.backButton)
         trackImage = findViewById(R.id.TrackImage)
         trackName = findViewById(R.id.TrackName)
         artistName = findViewById(R.id.ArtistName)
         trackLength = findViewById(R.id.TrackLengthValue)
-        trackLengthGroup =
-            findViewById(R.id.TrackLengthGroup)
+        trackLengthGroup = findViewById(R.id.TrackLengthGroup)
         albumName = findViewById(R.id.AlbumName)
         albumGroup = findViewById(R.id.AlbumGroup)
         releaseYearValue = findViewById(R.id.releaseYearValue)
-        releaseYearGroup =
-            findViewById(R.id.releaseYearGroup)
+        releaseYearGroup = findViewById(R.id.releaseYearGroup)
         genreValue = findViewById(R.id.genreValue)
         genreGroup = findViewById(R.id.genreGroup)
         countryName = findViewById(R.id.countryName)
         countryGroup = findViewById(R.id.countryGroup)
+        secsOfListening = findViewById(R.id.secsOfListening)
 
     }
+
     private fun preparePlayer() {
-         mediaPlayer.setDataSource(track.previewUrl)
+        mediaPlayer.setDataSource(track.previewUrl)
         mediaPlayer.prepareAsync()
         mediaPlayer.setOnPreparedListener {
             playButton.isEnabled = true
@@ -148,10 +151,11 @@ class PlayerActivity : AppCompatActivity() {
         }
         mediaPlayer.setOnCompletionListener {
             handler.removeCallbacks(run)
-           trackLength.text = DEFAULT_MM_SS
+            secsOfListening.text = DEFAULT_MM_SS
             playerState = STATE_PREPARED
         }
     }
+
     private fun startPlayer() {
         mediaPlayer.start()
         playButton.setImageResource(R.drawable.button_pause)
@@ -165,8 +169,9 @@ class PlayerActivity : AppCompatActivity() {
         playerState = STATE_PAUSED
         handler.removeCallbacks(run)
     }
+
     private fun playbackControl() {
-        when(playerState) {
+        when (playerState) {
             STATE_PLAYING -> {
                 pausePlayer()
             }
@@ -175,6 +180,7 @@ class PlayerActivity : AppCompatActivity() {
             }
         }
     }
+
     companion object {
         private const val DEFAULT_MM_SS = "00:00"
         private const val STATE_DEFAULT = 0
