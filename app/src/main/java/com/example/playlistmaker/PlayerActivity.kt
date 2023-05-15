@@ -120,6 +120,7 @@ class PlayerActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         mediaPlayer.release()
+
     }
 
     private fun initialization() {
@@ -151,6 +152,7 @@ class PlayerActivity : AppCompatActivity() {
         }
         mediaPlayer.setOnCompletionListener {
             handler.removeCallbacks(run)
+            playButton.setImageResource(R.drawable.play_track)
             secsOfListening.text = DEFAULT_MM_SS
             playerState = STATE_PREPARED
         }
