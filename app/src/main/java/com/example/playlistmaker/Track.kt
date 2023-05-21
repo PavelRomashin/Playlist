@@ -2,7 +2,7 @@ package com.example.playlistmaker
 
 import com.google.gson.annotations.SerializedName
 
-data class Track(
+data class Track (
     val trackName: String, // Название композиции
     val artistName: String, // Имя исполнителя
     @SerializedName("trackTimeMillis") val trackTime: Int, // Продолжительность трека
@@ -11,7 +11,8 @@ data class Track(
     val collectionName: String,
     val releaseDate: String,
     val primaryGenreName: String,
-    val country: String
+    val country: String,
+    val previewUrl: String
 ) {
 
     fun getCoverArtwork() = artworkUrl100.replaceAfterLast('/', "512x512bb.jpg")
